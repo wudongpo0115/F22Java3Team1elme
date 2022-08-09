@@ -1,1 +1,4 @@
-嗨嗨嗨
+public  class   hi{
+    String hi;
+    String hello;
+}
