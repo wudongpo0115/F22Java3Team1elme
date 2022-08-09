@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<input id="btn" type="button" value="生成">
+<div id="display"></div>
+</body>
+<script>
+<!--时间绑定函数disResult地址-->
+    window.onload = function () {
+        //得到的是函数disResult地址
+        document.getElementById("btn").onclick = disResult;
+    };
+
+    function  disResult() {
+        var redBall = new Array(33);
+        var reddj = 6; //红色球的点击数
+        var redRestlt = new Array(0);//初始一个数组，用来接后面splice出来的数，用push放入数组
+        for(let i=0;i<redBall.length;i++)
+        {
+            redBall[i] = i+1;
+        }
+
+        var ired = 0;//显示初始化
+        for(let i=0;i<reddj;i++){
+            ired =Math.floor(Math.random()*redBall.length);//splice会把数取出来并且把内容改掉，所以这里不用33，而用数组的长度
+            redRestlt.push(redBall.splice(ired,1)[0]);
+
+        }
+
+        //按结果遍历
+        var redsz = "";
+        for(let i =0;i<redRestlt.length;i++)
+        {
+            //这么写如果数据多的话，会是DOM卡掉
+            //document.getElementById("display").innerHTML += "<span>"+redRestlt[i]+"</span>";
+
+            redsz += "<span>"+redRestlt[i]+" ， "+"</span>";
+        }
+        document.getElementById("display").innerHTML = redsz;
+
+        // console.log(redBall);
+    }
+</script>
+</html>
