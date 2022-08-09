@@ -1,1 +1,3 @@
-嗨嗨嗨
+class hi{
+    int i=0;
+        }
