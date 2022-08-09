@@ -1,7 +1,6 @@
 import org.junit.Test;
 
 public class TestDemo {
-
     private String name;
     private  Integer age;
 
