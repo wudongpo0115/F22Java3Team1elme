@@ -52,9 +52,23 @@
       <scope>compile</scope>
     </dependency>
 
+    <!--    mybatis包-->
+    <dependency>
+      <groupId>org.mybatis</groupId>
+      <artifactId>mybatis</artifactId>
+      <version>3.5.10</version>
+    </dependency>
+
+    <!--    mybatis逆向工程依赖-->
+    <dependency>
+      <groupId>org.mybatis.generator</groupId>
+      <artifactId>mybatis-generator-core</artifactId>
+      <version>1.4.1</version>
+    </dependency>
   </dependencies>
 
   <build>
+
     <finalName>servletVue</finalName>
     <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
       <plugins>
@@ -89,5 +103,18 @@
         </plugin>
       </plugins>
     </pluginManagement>
+    <!--配置需要发布何种文件-->
+    <resources>
+      <resource>
+        <directory>src/main/java</directory>
+        <includes>
+          <include>**/*.xml</include>
+          <include>**/*.properties</include>
+          <include>**/*.yaml</include>
+        </includes>
+        <filtering>true</filtering>
+      </resource>
+    </resources>
+
   </build>
 </project>
