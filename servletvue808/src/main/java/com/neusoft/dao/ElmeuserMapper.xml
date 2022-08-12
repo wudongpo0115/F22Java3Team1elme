@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neusoft.dao.ElmeuserMapper">
+  <resultMap id="BaseResultMap" type="com.neusoft.po.Elmeuser">
+    <id column="userId" jdbcType="VARCHAR" property="userid" />
+    <result column="psd" jdbcType="VARCHAR" property="psd" />
+    <result column="userName" jdbcType="VARCHAR" property="username" />
+    <result column="userSex" jdbcType="INTEGER" property="usersex" />
+    <result column="delTag" jdbcType="INTEGER" property="deltag" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.neusoft.po.Elmeuser">
+    <result column="userImg" jdbcType="LONGVARCHAR" property="userimg" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    userId, psd, userName, userSex, delTag
+  </sql>
+  <sql id="Blob_Column_List">
+    userImg
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.neusoft.po.ElmeuserExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from elmeuser
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.neusoft.po.ElmeuserExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from elmeuser
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from elmeuser
+    where userId = #{userid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from elmeuser
+    where userId = #{userid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.neusoft.po.ElmeuserExample">
+    delete from elmeuser
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.neusoft.po.Elmeuser">
+    insert into elmeuser (userId, psd, userName, 
+      userSex, delTag, userImg
+      )
+    values (#{userid,jdbcType=VARCHAR}, #{psd,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
+      #{usersex,jdbcType=INTEGER}, #{deltag,jdbcType=INTEGER}, #{userimg,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.neusoft.po.Elmeuser">
+    insert into elmeuser
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userid != null">
+        userId,
+      </if>
+      <if test="psd != null">
+        psd,
+      </if>
+      <if test="username != null">
+        userName,
+      </if>
+      <if test="usersex != null">
+        userSex,
+      </if>
+      <if test="deltag != null">
+        delTag,
+      </if>
+      <if test="userimg != null">
+        userImg,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userid != null">
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="psd != null">
+        #{psd,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="usersex != null">
+        #{usersex,jdbcType=INTEGER},
+      </if>
+      <if test="deltag != null">
+        #{deltag,jdbcType=INTEGER},
+      </if>
+      <if test="userimg != null">
+        #{userimg,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.neusoft.po.ElmeuserExample" resultType="java.lang.Long">
+    select count(*) from elmeuser
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update elmeuser
+    <set>
+      <if test="row.userid != null">
+        userId = #{row.userid,jdbcType=VARCHAR},
+      </if>
+      <if test="row.psd != null">
+        psd = #{row.psd,jdbcType=VARCHAR},
+      </if>
+      <if test="row.username != null">
+        userName = #{row.username,jdbcType=VARCHAR},
+      </if>
+      <if test="row.usersex != null">
+        userSex = #{row.usersex,jdbcType=INTEGER},
+      </if>
+      <if test="row.deltag != null">
+        delTag = #{row.deltag,jdbcType=INTEGER},
+      </if>
+      <if test="row.userimg != null">
+        userImg = #{row.userimg,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="example != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update elmeuser
+    set userId = #{row.userid,jdbcType=VARCHAR},
+      psd = #{row.psd,jdbcType=VARCHAR},
+      userName = #{row.username,jdbcType=VARCHAR},
+      userSex = #{row.usersex,jdbcType=INTEGER},
+      delTag = #{row.deltag,jdbcType=INTEGER},
+      userImg = #{row.userimg,jdbcType=LONGVARCHAR}
+    <if test="example != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update elmeuser
+    set userId = #{row.userid,jdbcType=VARCHAR},
+      psd = #{row.psd,jdbcType=VARCHAR},
+      userName = #{row.username,jdbcType=VARCHAR},
+      userSex = #{row.usersex,jdbcType=INTEGER},
+      delTag = #{row.deltag,jdbcType=INTEGER}
+    <if test="example != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.neusoft.po.Elmeuser">
+    update elmeuser
+    <set>
+      <if test="psd != null">
+        psd = #{psd,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        userName = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="usersex != null">
+        userSex = #{usersex,jdbcType=INTEGER},
+      </if>
+      <if test="deltag != null">
+        delTag = #{deltag,jdbcType=INTEGER},
+      </if>
+      <if test="userimg != null">
+        userImg = #{userimg,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where userId = #{userid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.neusoft.po.Elmeuser">
+    update elmeuser
+    set psd = #{psd,jdbcType=VARCHAR},
+      userName = #{username,jdbcType=VARCHAR},
+      userSex = #{usersex,jdbcType=INTEGER},
+      delTag = #{deltag,jdbcType=INTEGER},
+      userImg = #{userimg,jdbcType=LONGVARCHAR}
+    where userId = #{userid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.neusoft.po.Elmeuser">
+    update elmeuser
+    set psd = #{psd,jdbcType=VARCHAR},
+      userName = #{username,jdbcType=VARCHAR},
+      userSex = #{usersex,jdbcType=INTEGER},
+      delTag = #{deltag,jdbcType=INTEGER}
+    where userId = #{userid,jdbcType=VARCHAR}
+  </update>
+</mapper>
