@@ -17,7 +17,6 @@
     </environments>
     <!--    通过多动态代理方式自动映射java成和   SQL的关系-->
     <mappers>
-        <package name="po.dong.dao"/>
-        <mapper resource=""
+        <package name="com.neusoft.dao"/>
     </mappers>
 </configuration>
