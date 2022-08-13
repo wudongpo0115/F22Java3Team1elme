@@ -225,4 +225,52 @@
       userid = #{userid,jdbcType=VARCHAR}
     where daId = #{daid,jdbcType=INTEGER}
   </update>
+
+
+<!--  查询全表信息的方法-->
+  <select id="selectAll" resultType="com.neusoft.po.DeliveryAddress" resultMap="BaseResultMap">
+    select * from deliveryaddress
+
+  </select>
+
+<!--  两表连接通过用户id查询两表信息-->
+  <select id="selectByPrimaryKeyWithUser" parameterType="java.lang.String" resultMap="BaseResultMapWithUser">
+    select *
+    from deliveryaddress as d
+    left join elmeuser as e on d.userid=e.userId
+    where d.userid = #{userid,jdbcType=VARCHAR}
+  </select>
+
+  <resultMap id="BaseResultMapWithUser" type="com.neusoft.po.DeliveryAddress">
+    <id column="daId" jdbcType="INTEGER" property="daid" />
+    <result column="contactName" jdbcType="VARCHAR" property="contactname" />
+    <result column="contactSex" jdbcType="INTEGER" property="contactsex" />
+    <result column="contactTel" jdbcType="VARCHAR" property="contacttel" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="userid" jdbcType="VARCHAR" property="userid" />
+   <collection property="elmeuserList" ofType="com.neusoft.po.Elmeuser">
+     <id column="userId" jdbcType="VARCHAR" property="userid" />
+     <result column="psd" jdbcType="VARCHAR" property="psd" />
+     <result column="userName" jdbcType="INTEGER" property="username" />
+     <result column="userSex" jdbcType="VARCHAR" property="usersex" />
+     <result column="userImg" jdbcType="VARCHAR" property="userimg" />
+     <result column="delTag" jdbcType="VARCHAR" property="deltag" />
+   </collection>
+
+<!--    <association property="elmeuser" javaType="com.neusoft.po.Elmeuser">-->
+<!--      <id column="userId" jdbcType="VARCHAR" property="userId" />-->
+<!--      <result column="psd" jdbcType="VARCHAR" property="psd" />-->
+<!--      <result column="userName" jdbcType="INTEGER" property="userName" />-->
+<!--      <result column="userSex" jdbcType="VARCHAR" property="userSex" />-->
+<!--      <result column="userImg" jdbcType="VARCHAR" property="userImg" />-->
+<!--      <result column="delTag" jdbcType="VARCHAR" property="delTag" />-->
+<!--    </association>-->
+  </resultMap>
+
+  <!--    通过用户Id删除信息-->
+  <delete id="delInfoByExample" parameterType="java.lang.String">
+    delete from deliveryaddress
+    where userid = #{userid,jdbcType=VARCHAR}
+  </delete>
+
 </mapper>
