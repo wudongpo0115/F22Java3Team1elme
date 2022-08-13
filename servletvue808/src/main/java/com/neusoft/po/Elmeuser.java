@@ -60,4 +60,28 @@ public class Elmeuser {
     public void setUserimg(String userimg) {
         this.userimg = userimg;
     }
+
+    public Elmeuser() {
+    }
+
+    public Elmeuser(String userid, String psd, String username, Integer usersex, Integer deltag, String userimg) {
+        this.userid = userid;
+        this.psd = psd;
+        this.username = username;
+        this.usersex = usersex;
+        this.deltag = deltag;
+        this.userimg = userimg;
+    }
+
+    @Override
+    public String toString() {
+        return "Elmeuser{" +
+                "userid='" + userid + '\'' +
+                ", psd='" + psd + '\'' +
+                ", username='" + username + '\'' +
+                ", usersex=" + usersex +
+                ", deltag=" + deltag +
+                ", userimg='" + userimg + '\'' +
+                '}';
+    }
 }
