@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
 <mapper namespace="com.neusoft.dao.FoodMapper">
   <resultMap id="BaseResultMap" type="com.neusoft.po.Food">
     <id column="foodId" jdbcType="INTEGER" property="foodid" />
@@ -284,4 +285,42 @@
       remarks = #{remarks,jdbcType=VARCHAR}
     where foodId = #{foodid,jdbcType=INTEGER}
   </update>
+
+<!--  food全查询-->
+  <select id="selectFoodInfo" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select  foodId, foodName, foodExplain, foodImg, foodPrice, businessId, remarks
+    from food
+  </select>
+
+<!--  food和business 相连-->
+  <resultMap id="BaseResultMapWithInfo" type="com.neusoft.po.Food">
+    <id column="foodId" jdbcType="INTEGER" property="foodid" />
+    <result column="foodName" jdbcType="VARCHAR" property="foodname" />
+    <result column="foodExplain" jdbcType="VARCHAR" property="foodexplain" />
+    <result column="foodPrice" jdbcType="DOUBLE" property="foodprice" />
+    <result column="businessId" jdbcType="INTEGER" property="businessid" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+    <association property="business" javaType="com.neusoft.po.Business">
+      <id column="businessId" jdbcType="INTEGER" property="businessid" />
+      <result column="businessName" jdbcType="VARCHAR" property="businessname" />
+      <result column="businessAddress" jdbcType="VARCHAR" property="businessaddress" />
+      <result column="businessExplain" jdbcType="VARCHAR" property="businessexplain" />
+      <result column="orderTypeId" jdbcType="INTEGER" property="ordertypeid" />
+      <result column="starPrice" jdbcType="DOUBLE" property="starprice" />
+      <result column="deliveryPrice" jdbcType="DOUBLE" property="deliveryprice" />
+      <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+    </association>
+  </resultMap>
+  <select id="SelectFoodInfoWithBusiness" parameterType="java.lang.Integer" resultMap="BaseResultMapWithInfo">
+    select * from food as f
+                    left join business b on f.businessId = b.businessId
+    where f.businessId =#{uid,jdbcType=INTEGER}
+  </select>
+
+<!--  通过食物名字查询-->
+  <select id="selectByName" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select  foodId, foodName, foodExplain, foodImg, foodPrice, businessId, remarks
+    from food
+    where foodName=#{uid,jdbcType=INTEGER};
+  </select>
 </mapper>

@@ -70,4 +70,42 @@ public class Food {
     public void setFoodimg(String foodimg) {
         this.foodimg = foodimg;
     }
+
+    private Business business;
+
+    public Business getBusiness() {
+        return business;
+    }
+
+    public void setBusiness(Business business) {
+        this.business = business;
+    }
+
+    @Override
+    public String toString() {
+        return "Food{" +
+                "foodid=" + foodid +
+                ", foodname='" + foodname + '\'' +
+                ", foodexplain='" + foodexplain + '\'' +
+                ", foodprice=" + foodprice +
+                ", businessid=" + businessid +
+                ", remarks='" + remarks + '\'' +
+                ", foodimg='" + foodimg + '\'' +
+                ", business=" + business +
+                '}';
+    }
+
+    public Food() {
+    }
+
+    public Food(Integer foodid, String foodname, String foodexplain, Double foodprice, Integer businessid, String remarks, String foodimg, Business business) {
+        this.foodid = foodid;
+        this.foodname = foodname;
+        this.foodexplain = foodexplain;
+        this.foodprice = foodprice;
+        this.businessid = businessid;
+        this.remarks = remarks;
+        this.foodimg = foodimg;
+        this.business = business;
+    }
 }

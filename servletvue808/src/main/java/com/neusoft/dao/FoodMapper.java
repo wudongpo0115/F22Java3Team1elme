@@ -33,4 +33,13 @@ public interface FoodMapper {
     int updateByPrimaryKeyWithBLOBs(Food row);
 
     int updateByPrimaryKey(Food row);
+
+//    food全查询
+    List<Food> selectFoodInfo();
+
+//    id查询两表
+    List<Food> SelectFoodInfoWithBusiness(Integer businessid);
+
+//    通过名字查询
+    Food selectByName(String foodName);
 }
