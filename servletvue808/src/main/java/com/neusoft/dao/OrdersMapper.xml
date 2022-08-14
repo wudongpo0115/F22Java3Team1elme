@@ -240,4 +240,35 @@
       orderState = #{orderstate,jdbcType=INTEGER}
     where orderId = #{orderid,jdbcType=INTEGER}
   </update>
+
+
+<!--  新增的sql片段-->
+  <!--  如果有对象，使用association封装， 如果是1对多的方式，使用collection封装 -->
+  <resultMap id="BaseResultMapWithDetailet" type="com.neusoft.po.Orders">
+    <id column="orderId" jdbcType="INTEGER" property="orderid" />
+    <result column="userId" jdbcType="VARCHAR" property="userid" />
+    <result column="businessId" jdbcType="INTEGER" property="businessid" />
+    <result column="orderDate" jdbcType="VARCHAR" property="orderdate" />
+    <result column="orderTotal" jdbcType="DOUBLE" property="ordertotal" />
+    <result column="daId" jdbcType="INTEGER" property="daid" />
+    <result column="orderState" jdbcType="INTEGER" property="orderstate" />
+    
+    <association property="orderdetailet" javaType="com.neusoft.po.OrderDetailet">
+      <id column="odid" jdbcType="INTEGER" property="odid" />
+      <result column="foodid" jdbcType="INTEGER" property="foodid" />
+      <result column="quantity" jdbcType="INTEGER" property="quantity" />
+      <result column="odorderid" jdbcType="INTEGER" property="orderid" />
+    </association>
+
+  </resultMap>
+<!--  新增的方法-->
+<!--  /查询定单多表链接方法-->
+  <select id="selectByUserIdWithDetailet" parameterType="java.lang.Integer" resultMap="BaseResultMapWithDetailet">
+    select
+      o.orderId,o.userId,o.businessId,o.orderDate,o.orderTotal,o.daId,o.orderState,od.odId,od.foodId,od.quantity,od.orderId as odorderId
+    from orders o,orderdetailet od
+    where o.orderId = od.orderId
+    and o.userId = #{userid,jdbcType=INTEGER}
+  </select>
+
 </mapper>

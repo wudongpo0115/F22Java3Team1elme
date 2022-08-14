@@ -27,4 +27,9 @@ public interface OrdersMapper {
     int updateByPrimaryKeySelective(Orders row);
 
     int updateByPrimaryKey(Orders row);
+
+    //新增的方法
+
+    //查看订单的功能
+    Orders selectByUserIdWithDetailet(Integer userId);
 }
