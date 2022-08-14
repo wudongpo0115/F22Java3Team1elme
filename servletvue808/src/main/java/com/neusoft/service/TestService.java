@@ -1,6 +1,8 @@
 package com.neusoft.service;
 
+import com.neusoft.po.Cart;
 import com.neusoft.po.DeliveryAddress;
+import com.neusoft.service.Impl.CartServiceImpl;
 import com.neusoft.service.Impl.DeliveryaddressServiceImpl;
 import org.junit.Test;
 
@@ -8,6 +10,7 @@ import java.util.List;
 
 public class TestService {
     private DeliveryaddressServiceImpl deliveryaddressServiceImpl = null;
+    private CartServiceImpl cartServiceImpl = null;
 
     //查询全表信息的测试方法
     @Test
@@ -102,5 +105,107 @@ public class TestService {
         System.out.println(deliveryAddresses);
     }
 
+    //查询购物车全表信息的测试方法
+    @Test
+    public void testCartSelectAll() {
+        cartServiceImpl = new CartServiceImpl();
+        List<Cart> carts = cartServiceImpl.selAll();
+        for (Cart items:carts)
+        {
+            System.out.println(items.toString());
+        }
+    }
 
+    //两表连接通过用户id查询购物车表和用户表信息
+    @Test
+    public void testQueryWithUser() {
+        cartServiceImpl = new CartServiceImpl();
+        List<Cart> carts = cartServiceImpl.queryInfoWithElmeUser("2");
+        for (Cart items:carts)
+        {
+            System.out.println(items.toStringElmeuser());
+        }
+    }
+
+    //两表连接通过食物id查询购物车表和食品表信息
+    @Test
+    public void testQueryWithFood() {
+        cartServiceImpl = new CartServiceImpl();
+        List<Cart> carts = cartServiceImpl.queryInfoWithFood(1);
+        for (Cart items:carts)
+        {
+            System.out.println(items.toStringFood());
+        }
+    }
+
+    //两表连接通过商家id查询购物车表和商家表信息
+    @Test
+    public void testQueryWithBusiness() {
+        cartServiceImpl = new CartServiceImpl();
+        List<Cart> carts = cartServiceImpl.queryInfoWithBusiness(1);
+        for (Cart items:carts)
+        {
+            System.out.println(items.toStringBusiness());
+        }
+    }
+
+    //通过主键查询购物车表信息
+    @Test
+    public void testSelByPK() {
+        cartServiceImpl = new CartServiceImpl();
+        Cart cart = cartServiceImpl.selByPK(2);
+        System.out.println(cart);
+    }
+
+    //通过主键删除
+    @Test
+    public void textDelInfoByPK() {
+        cartServiceImpl = new CartServiceImpl();
+        boolean b = cartServiceImpl.deleteByPK(3);
+        if(b)
+        {
+            System.out.println("购物车信息删除成功");
+        }else
+        {
+            System.out.println("删除失败");
+        }
+    }
+
+    //购物车表全部删除
+    @Test
+    public void testDeleteAll(){
+        cartServiceImpl = new CartServiceImpl();
+        int i = cartServiceImpl.delAll();
+    }
+
+    //修改购物车的数量
+    @Test
+    public void testUpdateQuantity(){
+        cartServiceImpl = new CartServiceImpl();
+
+    }
+
+    //通过食品id显示信息
+    @Test
+    public void testSelectByfood(){
+        cartServiceImpl = new CartServiceImpl();
+        List<Cart> carts = cartServiceImpl.selectByFoodId(1);
+        System.out.println(carts.toString());
+    }
+
+    //通过商家id显示信息
+    @Test
+    public void testSelectByBusiness(){
+        cartServiceImpl = new CartServiceImpl();
+        List<Cart> carts = cartServiceImpl.selectByBusinessId(2);
+        System.out.println(carts.toString());
+    }
+
+    //通过用户id显示信息
+    @Test
+    public void testSelectByUser(){
+        cartServiceImpl = new CartServiceImpl();
+        List<Cart> carts = cartServiceImpl.selectByElmeUserId("2");
+        System.out.println(carts.toString());
+    }
 }

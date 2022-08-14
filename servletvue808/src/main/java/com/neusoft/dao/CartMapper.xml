@@ -208,4 +208,115 @@
       quantity = #{quantity,jdbcType=INTEGER}
     where cartId = #{cartid,jdbcType=INTEGER}
   </update>
+
+  <!--  查询全表信息的方法-->
+  <select id="selectAll" resultType="com.neusoft.po.Cart" resultMap="BaseResultMap">
+    select * from cart
+  </select>
+
+  <!--  两表连接通过用户id查询两表信息-->
+  <select id="selectByPrimaryKeyWithUser" parameterType="java.lang.String" resultMap="BaseResultMapWithUser">
+    select *
+    from cart as c
+    left join elmeuser as e on c.userid=e.userId
+    where c.userid = #{userid,jdbcType=VARCHAR}
+  </select>
+
+  <resultMap id="BaseResultMapWithUser" type="com.neusoft.po.Cart">
+    <id column="cartId" jdbcType="INTEGER" property="cartid" />
+    <result column="foodId" jdbcType="INTEGER" property="foodid" />
+    <result column="businessId" jdbcType="INTEGER" property="businessid" />
+    <result column="userid" jdbcType="VARCHAR" property="userid" />
+    <result column="quantity" jdbcType="INTEGER" property="quantity" />
+    <collection property="elmeuserList" ofType="com.neusoft.po.Elmeuser">
+      <id column="userId" jdbcType="VARCHAR" property="userid" />
+      <result column="psd" jdbcType="VARCHAR" property="psd" />
+      <result column="userName" jdbcType="INTEGER" property="username" />
+      <result column="userSex" jdbcType="VARCHAR" property="usersex" />
+      <result column="userImg" jdbcType="VARCHAR" property="userimg" />
+      <result column="delTag" jdbcType="VARCHAR" property="deltag" />
+    </collection>
+  </resultMap>
+
+<!--  两表连接通过食物id查询购物车表和食品表信息-->
+  <select id="selectByPrimaryKeyWithFood" parameterType="java.lang.Integer" resultMap="BaseResultMapWithFood">
+    select *
+    from cart as c
+    left join food as f on c.foodid=f.foodId
+    where c.foodid = #{foodid,jdbcType=VARCHAR}
+  </select>
+
+  <resultMap id="BaseResultMapWithFood" type="com.neusoft.po.Cart">
+  <id column="cartId" jdbcType="INTEGER" property="cartid" />
+  <result column="foodId" jdbcType="INTEGER" property="foodid" />
+  <result column="businessId" jdbcType="INTEGER" property="businessid" />
+  <result column="userid" jdbcType="VARCHAR" property="userid" />
+  <result column="quantity" jdbcType="INTEGER" property="quantity" />
+  <collection property="foodList" ofType="com.neusoft.po.Food">
+    <id column="foodId" jdbcType="INTEGER" property="foodid" />
+    <result column="foodName" jdbcType="INTEGER" property="foodname" />
+    <result column="foodExplain" jdbcType="INTEGER" property="foodexplain" />
+    <result column="foodImg" jdbcType="VARCHAR" property="foodimg" />
+    <result column="foodPrice" jdbcType="INTEGER" property="foodprice" />
+    <result column="businessId" jdbcType="VARCHAR" property="businessid" />
+    <result column="remarks" jdbcType="INTEGER" property="remarks" />
+  </collection>
+
+  </resultMap>
+
+  <!--  两表连接通过食物id查询购物车表和商家表信息-->
+  <select id="selectByPrimaryKeyWithBusiness" parameterType="java.lang.Integer" resultMap="BaseResultMapWithBusiness">
+    select *
+    from cart as c
+           left join business as b on c.businessid=b.businessId
+    where c.businessid = #{foodid,jdbcType=VARCHAR}
+  </select>
+
+  <resultMap id="BaseResultMapWithBusiness" type="com.neusoft.po.Cart">
+    <id column="cartId" jdbcType="INTEGER" property="cartid" />
+    <result column="foodId" jdbcType="INTEGER" property="foodid" />
+    <result column="businessId" jdbcType="INTEGER" property="businessid" />
+    <result column="userid" jdbcType="VARCHAR" property="userid" />
+    <result column="quantity" jdbcType="INTEGER" property="quantity" />
+    <collection property="businessList" ofType="com.neusoft.po.Business">
+      <id column="businessId" jdbcType="INTEGER" property="businessid" />
+      <result column="businessName" jdbcType="VARCHAR" property="businessname" />
+      <result column="businessAddress" jdbcType="VARCHAR" property="businessaddress" />
+      <result column="businessExplain" jdbcType="VARCHAR" property="businessexplain" />
+      <result column="businessImg" jdbcType="VARCHAR" property="businessimg" />
+      <result column="orderTypeid" jdbcType="INTEGER" property="ordertypeid" />
+      <result column="starPrice" jdbcType="DOUBLE" property="starprice" />
+      <result column="deliveryPrice" jdbcType="DOUBLE" property="deliveryprice" />
+      <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+    </collection>
+
+  </resultMap>
+
+<!--  添加数量-->
+  <update id="updateQuantity" parameterType="com.neusoft.po.Cart">
+    update cart
+    set quantity = #{quantity,jdbcType=INTEGER}+count;
+    where foodId = #{foodid,jdbcType=INTEGER},
+      businessId = #{businessid,jdbcType=INTEGER},
+      userid = #{userid,jdbcType=VARCHAR}
+  </update>
+
+<!--  通过食品id搜索信息-->
+  <select id="selectByFoodid" resultType="com.neusoft.po.Cart" resultMap="BaseResultMap">
+    select * from cart
+    where foodId = #{foodid,jdbcType=INTEGER}
+  </select>
+
+  <!--  通过商家id搜索信息-->
+  <select id="selectByBusinessid" resultType="com.neusoft.po.Cart" resultMap="BaseResultMap">
+    select * from cart
+    where businessId = #{businessid,jdbcType=INTEGER}
+  </select>
+
+  <!--  通过用户id搜索信息-->
+  <select id="selectByUserid" resultType="com.neusoft.po.Cart" resultMap="BaseResultMap">
+    select * from cart
+    where userid = #{userid,jdbcType=VARCHAR}
+  </select>
+
 </mapper>

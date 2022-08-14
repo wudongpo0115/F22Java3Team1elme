@@ -34,6 +34,6 @@ public interface DeliveryaddressService {
     public List<DeliveryAddress> selectByUserPhone(String contactTel);
 
     //通过地址信息模糊查询
-    public List<DeliveryAddress> selectLikeAddressWithUser(String address)
+    public List<DeliveryAddress> selectLikeAddressWithUser(String address);
 
 }
