@@ -15,6 +15,8 @@ public class DeliveryAddress {
 
     private String userid;
 
+
+
     public Integer getDaid() {
         return daid;
     }
@@ -73,6 +75,16 @@ public class DeliveryAddress {
         this.address = address;
         this.userid = userid;
     }
+
+    public DeliveryAddress( int daid, String contactname, Integer contactsex, String contacttel, String address, String userid) {
+        this.daid = daid;
+        this.contactname = contactname;
+        this.contactsex = contactsex;
+        this.contacttel = contacttel;
+        this.address = address;
+        this.userid = userid;
+    }
+
 
     @Override
     public String toString() {

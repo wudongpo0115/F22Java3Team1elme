@@ -23,4 +23,17 @@ public interface DeliveryaddressService {
 
     //通过用户Id删除信息
     public int delInfoByExampleWithUser(String userid);
+
+    //通过主键修改地址信息
+    public int updateInfoWithUser(DeliveryAddress deliveryAddress);
+
+    //通过用户名查询信息
+    public List<DeliveryAddress> selectByUsername(String contactName);
+
+    //通过手机号查询信息
+    public List<DeliveryAddress> selectByUserPhone(String contactTel);
+
+    //通过地址信息模糊查询
+    public List<DeliveryAddress> selectLikeAddressWithUser(String address)
+
 }

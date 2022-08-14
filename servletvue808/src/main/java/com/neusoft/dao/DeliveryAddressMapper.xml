@@ -273,4 +273,30 @@
     where userid = #{userid,jdbcType=VARCHAR}
   </delete>
 
+<!--  通过用户名查询信息-->
+  <select id="selectByUsername" resultType="com.neusoft.po.DeliveryAddress" resultMap="BaseResultMap">
+    select * from deliveryaddress
+    where contactname = #{contactname,jdbcType=VARCHAR}
+
+  </select>
+
+  <!--  通过手机号查询信息-->
+  <select id="selectByUserTel" resultType="com.neusoft.po.DeliveryAddress" resultMap="BaseResultMap">
+    select * from deliveryaddress
+    where contactTel = #{contactTel,jdbcType=VARCHAR}
+
+  </select>
+
+  <!--  通过手机号查询信息-->
+  <select id="selectByAddress" resultType="com.neusoft.po.DeliveryAddress" resultMap="BaseResultMap">
+    select * from deliveryaddress
+    where contactTel = #{contactTel,jdbcType=VARCHAR}
+  </select>
+
+<!--  通过地址信息模糊查询-->
+  <select id="selectLikeAddress" resultType="com.neusoft.po.DeliveryAddress" resultMap="BaseResultMap">
+    select * from deliveryaddress
+    where address like "%" #{address} "%"
+  </select>
+
 </mapper>

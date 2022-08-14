@@ -36,4 +36,14 @@ public interface DeliveryAddressMapper {
 
     //通过用户Id删除信息
     int delInfoByExample(String userid);
+
+    //通过用户名查询信息
+    List<DeliveryAddress> selectByUsername(String contactName);
+
+    //通过手机号查询信息
+    List<DeliveryAddress> selectByUserTel(String contactTel);
+
+    //通过地址信息模糊查询
+    List<DeliveryAddress> selectLikeAddress(@Param("address") String address);
+
 }

@@ -67,13 +67,39 @@ public class TestService {
     public void testDelByExample() {
         deliveryaddressServiceImpl = new DeliveryaddressServiceImpl();
         int i = deliveryaddressServiceImpl.delInfoByExampleWithUser("2");
-        if (i>0)
-        {
-            System.out.println("地址信息删除成功");
-        }else
-        {
-            System.out.println("该用户为设置地址信息，无法删除");
-        }
+
+    }
+
+    //通过主键修改信息
+    @Test
+    public void tastUpdateByPK(){
+        deliveryaddressServiceImpl = new DeliveryaddressServiceImpl();
+        int i = deliveryaddressServiceImpl.updateInfoWithUser(new DeliveryAddress(5,"阿紫", 1, "13434543882", "中国台湾", "3"));
+    }
+
+    //通过用户名查询信息
+    @Test
+    public void testSelectByUaerName(){
+        deliveryaddressServiceImpl = new DeliveryaddressServiceImpl();
+        List<DeliveryAddress> deliveryAddresses = deliveryaddressServiceImpl.selectByUsername("绿绿");
+        System.out.println(deliveryAddresses);
+    }
+
+    //通过用户名查询信息
+    @Test
+    public void testSelectByUaerTel(){
+        deliveryaddressServiceImpl = new DeliveryaddressServiceImpl();
+        List<DeliveryAddress> deliveryAddresses = deliveryaddressServiceImpl.selectByUserPhone("15686272135");
+        System.out.println(deliveryAddresses);
+    }
+
+    //通过地址信息模糊查询
+    @Test
+    public void testSelectLikeAddress(){
+        deliveryaddressServiceImpl = new DeliveryaddressServiceImpl();
+        String address = "辽宁省";
+        List<DeliveryAddress> deliveryAddresses = deliveryaddressServiceImpl.selectLikeAddressWithUser(address);
+        System.out.println(deliveryAddresses);
     }
 
 

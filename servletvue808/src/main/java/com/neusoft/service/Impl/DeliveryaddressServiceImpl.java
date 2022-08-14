@@ -83,15 +83,49 @@ public class DeliveryaddressServiceImpl implements DeliveryaddressService {
     //通过用户Id删除信息
     public int delInfoByExampleWithUser(String userid) {
         int i = deliveryAddressMapper.delInfoByExample(userid);
+        if (i>0)
+        {
+            System.out.println("地址信息删除成功");
+        }else
+        {
+            System.out.println("该用户为设置地址信息，无法删除");
+        }
         return i;
     }
 
+    //通过主键修改信息
+    public int updateInfoWithUser(DeliveryAddress deliveryAddress){
+        int i = 0;
+        DeliveryAddressExample deliveryAddressExample = new DeliveryAddressExample();
+        DeliveryAddressExample.Criteria criteria = deliveryAddressExample.createCriteria();
+        criteria.andDaidEqualTo(deliveryAddress.getDaid());
+        i = deliveryAddressMapper.updateByPrimaryKeySelective(deliveryAddress);
+        if (i>0)
+        {
+            System.out.println("信息修改成功");
+        }else{
+            System.out.println("未找到相关地址信息，无法修改");
+        }
+        return i;
+    }
 
+    //通过用户名查询信息
+    public List<DeliveryAddress> selectByUsername(String contactName){
+        List<DeliveryAddress> deliveryAddresses = deliveryAddressMapper.selectByUsername(contactName);
+        return deliveryAddresses;
+    }
 
+    //通过手机号查询信息
+    public List<DeliveryAddress> selectByUserPhone(String contactTel){
+        List<DeliveryAddress> deliveryAddresses = deliveryAddressMapper.selectByUserTel(contactTel);
+        return deliveryAddresses;
+    }
 
-
-
-
+    //通过地址信息模糊查询
+    public List<DeliveryAddress> selectLikeAddressWithUser(String address){
+        List<DeliveryAddress> deliveryAddresses = deliveryAddressMapper.selectLikeAddress(address);
+        return deliveryAddresses;
+    }
 
 
 }
