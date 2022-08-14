@@ -33,4 +33,9 @@ public interface BusinessMapper {
     int updateByPrimaryKeyWithBLOBs(Business row);
 
     int updateByPrimaryKey(Business row);
+
+//    通过名字查找
+    Business selectByName(String businessname);
+
+    List<Business>selectBusinessInfo();
 }

@@ -1,5 +1,7 @@
 package com.neusoft.po;
 
+import java.util.List;
+
 public class DeliveryAddress {
     private Integer daid;
 
@@ -12,6 +14,8 @@ public class DeliveryAddress {
     private String address;
 
     private String userid;
+
+
 
     public Integer getDaid() {
         return daid;
@@ -59,5 +63,61 @@ public class DeliveryAddress {
 
     public void setUserid(String userid) {
         this.userid = userid;
+    }
+
+    public DeliveryAddress() {
+    }
+
+    public DeliveryAddress( String contactname, Integer contactsex, String contacttel, String address, String userid) {
+        this.contactname = contactname;
+        this.contactsex = contactsex;
+        this.contacttel = contacttel;
+        this.address = address;
+        this.userid = userid;
+    }
+
+    public DeliveryAddress( int daid, String contactname, Integer contactsex, String contacttel, String address, String userid) {
+        this.daid = daid;
+        this.contactname = contactname;
+        this.contactsex = contactsex;
+        this.contacttel = contacttel;
+        this.address = address;
+        this.userid = userid;
+    }
+
+
+    @Override
+    public String toString() {
+        return "DeliveryAddress{" +
+                "daid=" + daid +
+                ", contactname='" + contactname + '\'' +
+                ", contactsex=" + contactsex +
+                ", contacttel='" + contacttel + '\'' +
+                ", address='" + address + '\'' +
+                ", userid='" + userid + '\n' +
+                ", elmeuser='" + elmeuser + '\n' +
+                ", elmeuserList='" + elmeuserList + '\'' +
+                '}';
+    }
+
+    //用户表与送货地址一对一的getting和setting
+    private Elmeuser elmeuser;
+
+    public Elmeuser getElmeuser() {
+        return elmeuser;
+    }
+
+    public void setElmeuser(Elmeuser elmeuser) {
+        this.elmeuser = elmeuser;
+    }
+
+    private List<Elmeuser> elmeuserList;
+
+    public List<Elmeuser> getElmeuserList() {
+        return elmeuserList;
+    }
+
+    public void setElmeuserList(List<Elmeuser> elmeuserList) {
+        this.elmeuserList = elmeuserList;
     }
 }

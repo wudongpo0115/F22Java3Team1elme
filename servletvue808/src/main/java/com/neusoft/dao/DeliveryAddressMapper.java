@@ -27,4 +27,23 @@ public interface DeliveryAddressMapper {
     int updateByPrimaryKeySelective(DeliveryAddress row);
 
     int updateByPrimaryKey(DeliveryAddress row);
+
+    //查询全表信息
+    List<DeliveryAddress> selectAll();
+
+    //两表连接通过用户id查询两表信息
+    List<DeliveryAddress> selectByPrimaryKeyWithUser (String userid);
+
+    //通过用户Id删除信息
+    int delInfoByExample(String userid);
+
+    //通过用户名查询信息
+    List<DeliveryAddress> selectByUsername(String contactName);
+
+    //通过手机号查询信息
+    List<DeliveryAddress> selectByUserTel(String contactTel);
+
+    //通过地址信息模糊查询
+    List<DeliveryAddress> selectLikeAddress(@Param("address") String address);
+
 }

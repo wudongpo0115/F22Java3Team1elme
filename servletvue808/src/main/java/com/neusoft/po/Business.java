@@ -90,4 +90,34 @@ public class Business {
     public void setBusinessimg(String businessimg) {
         this.businessimg = businessimg;
     }
+
+    public Business() {
+    }
+
+    public Business(Integer businessid, String businessname, String businessaddress, String businessexplain, Integer ordertypeid, Double starprice, Double deliveryprice, String remarks, String businessimg) {
+        this.businessid = businessid;
+        this.businessname = businessname;
+        this.businessaddress = businessaddress;
+        this.businessexplain = businessexplain;
+        this.ordertypeid = ordertypeid;
+        this.starprice = starprice;
+        this.deliveryprice = deliveryprice;
+        this.remarks = remarks;
+        this.businessimg = businessimg;
+    }
+
+    @Override
+    public String toString() {
+        return "Business{" +
+                "businessid=" + businessid +
+                ", businessname='" + businessname + '\'' +
+                ", businessaddress='" + businessaddress + '\'' +
+                ", businessexplain='" + businessexplain + '\'' +
+                ", ordertypeid=" + ordertypeid +
+                ", starprice=" + starprice +
+                ", deliveryprice=" + deliveryprice +
+                ", remarks='" + remarks + '\'' +
+                ", businessimg='" + businessimg + '\'' +
+                '}';
+    }
 }

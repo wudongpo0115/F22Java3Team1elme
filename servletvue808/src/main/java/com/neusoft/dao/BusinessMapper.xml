@@ -321,4 +321,22 @@
       remarks = #{remarks,jdbcType=VARCHAR}
     where businessId = #{businessid,jdbcType=INTEGER}
   </update>
+
+
+<!--  新添加的方法：按名字查询-->
+  <select id="selectByName" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select  businessId,businessName,businessAddress,
+            businessExplain,businessImg,orderTypeId,
+            starPrice,deliveryPrice,remarks
+    from business
+    where businessName=#{businessname,jdbcType=INTEGER}
+  </select>
+
+<!--  Business全查询-->
+  <select id="selectBusinessInfo" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select  businessId,businessName,businessAddress,
+            businessExplain,businessImg,orderTypeId,
+            starPrice,deliveryPrice,remarks
+    from business
+  </select>
 </mapper>
