@@ -120,4 +120,8 @@ public class DeliveryAddress {
     public void setElmeuserList(List<Elmeuser> elmeuserList) {
         this.elmeuserList = elmeuserList;
     }
+
+    public DeliveryAddress(Integer daid) {
+        this.daid = daid;
+    }
 }

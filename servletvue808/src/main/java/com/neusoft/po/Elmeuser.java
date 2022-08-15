@@ -1,5 +1,7 @@
 package com.neusoft.po;
 
+import java.util.Objects;
+
 public class Elmeuser {
     private String userid;
 
@@ -83,5 +85,46 @@ public class Elmeuser {
                 ", deltag=" + deltag +
                 ", userimg='" + userimg + '\'' +
                 '}';
+    }
+
+    @Override
+    public String toString() {
+        return "Elmeuser{" +
+                "userid='" + userid + '\'' +
+                ", psd='" + psd + '\'' +
+                ", username='" + username + '\'' +
+                ", usersex=" + usersex +
+                ", deltag=" + deltag +
+                ", userimg='" + userimg + '\'' +
+                '}';
+    }
+
+    public Elmeuser() {}
+
+    public Elmeuser(String userid, String psd, String username, Integer usersex, Integer deltag, String userimg) {
+        this.userid = userid;
+        this.psd = psd;
+        this.username = username;
+        this.usersex = usersex;
+        this.deltag = deltag;
+        this.userimg = userimg;
+    }
+
+    public Elmeuser(String psd, String username) {
+        this.psd = psd;
+        this.username = username;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Elmeuser elmeuser = (Elmeuser) o;
+        return Objects.equals(userid, elmeuser.userid) && Objects.equals(psd, elmeuser.psd) && Objects.equals(username, elmeuser.username) && Objects.equals(usersex, elmeuser.usersex) && Objects.equals(deltag, elmeuser.deltag) && Objects.equals(userimg, elmeuser.userimg);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(userid, psd, username, usersex, deltag, userimg);
     }
 }

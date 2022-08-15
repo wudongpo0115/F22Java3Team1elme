@@ -120,4 +120,7 @@ public class Business {
                 ", businessimg='" + businessimg + '\'' +
                 '}';
     }
+
+
+
 }
