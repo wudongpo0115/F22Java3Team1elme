@@ -6,12 +6,13 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import service.FoodService;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
-public class FoodServiceImpl {
+public class FoodServiceImpl implements FoodService {
     private FoodMapper foodMapper=null;
     public FoodServiceImpl() {
         String resource = "mybatis.xml";
@@ -50,5 +51,4 @@ public class FoodServiceImpl {
         Food food = foodMapper.selectByName(foodName);
         return food;
     }
-
 }

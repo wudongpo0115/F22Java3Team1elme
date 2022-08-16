@@ -193,4 +193,50 @@
       quantity = #{quantity,jdbcType=INTEGER}
     where odId = #{odid,jdbcType=INTEGER}
   </update>
+
+<!--order orderlist连-->
+  <resultMap id="BaseResultMapWithInfo" type="com.neusoft.po.OrderDetailet">
+    <id column="odId" jdbcType="INTEGER" property="odid" />
+    <result column="orderId" jdbcType="INTEGER" property="orderid" />
+    <result column="foodId" jdbcType="INTEGER" property="foodid" />
+    <result column="quantity" jdbcType="INTEGER" property="quantity" />
+    <association property="orders" javaType="com.neusoft.po.Orders">
+    <id column="orderId" jdbcType="INTEGER" property="orderid" />
+    <result column="userId" jdbcType="VARCHAR" property="userid" />
+    <result column="businessId" jdbcType="INTEGER" property="businessid" />
+    <result column="orderDate" jdbcType="VARCHAR" property="orderdate" />
+    <result column="orderTotal" jdbcType="DOUBLE" property="ordertotal" />
+    <result column="daId" jdbcType="INTEGER" property="daid" />
+    <result column="orderState" jdbcType="INTEGER" property="orderstate" />
+  </association>
+  </resultMap>
+  <select id="selectOrderDetailetBypkWithOrder" parameterType="java.lang.Integer" resultMap="BaseResultMapWithInfo">
+    select *
+    from orderdetailet o1
+           left join orders o on o.orderId = o1.orderId
+      where o1.orderId=#{orderid,jdbcType=INTEGER}
+</select>
+
+  <!--food orderlist连-->
+  <resultMap id="BaseResultMapWithInfo1" type="com.neusoft.po.OrderDetailet">
+  <id column="odId" jdbcType="INTEGER" property="odid" />
+  <result column="orderid" jdbcType="INTEGER" property="orderid" />
+  <result column="foodid" jdbcType="INTEGER" property="foodid" />
+  <result column="quantity" jdbcType="INTEGER" property="quantity" />
+  <association property="Food" javaType="com.neusoft.po.Food">
+    <id column="foodId" jdbcType="INTEGER" property="foodid" />
+    <result column="foodName" jdbcType="VARCHAR" property="foodname" />
+    <result column="foodExplain" jdbcType="VARCHAR" property="foodexplain" />
+    <result column="foodPrice" jdbcType="DOUBLE" property="foodprice" />
+    <result column="businessId" jdbcType="INTEGER" property="businessid" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+  </association>
+
+  </resultMap>
+  <select id="selectOrderDetailetBypkWithFood" parameterType="java.lang.Integer" resultMap="BaseResultMapWithInfo1">
+    select *
+    from orderdetailet o1
+           left join food o on o1.foodId = o.foodId
+    where o1.foodId=#{orderid,jdbcType=INTEGER}
+  </select>
 </mapper>

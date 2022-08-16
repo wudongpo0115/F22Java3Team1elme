@@ -11,4 +11,5 @@ public interface BusinessService {
     public Business SelectBusinessInfoById(Integer businessid);
 //    通过name查询
     public Business SelectBusinessInfoByName(String businessname);
+
 }

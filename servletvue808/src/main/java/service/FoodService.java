@@ -9,4 +9,5 @@ public interface FoodService {
     public Food SelectFoodById(Integer foodid);
     public List<Food> SelectFoodInfo();
     public Food SelectFoodByName(String foodName);
+
 }

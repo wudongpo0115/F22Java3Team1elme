@@ -3,6 +3,8 @@ package com.neusoft.dao;
 import com.neusoft.po.OrderDetailet;
 import com.neusoft.po.OrderDetailetExample;
 import java.util.List;
+
+import com.neusoft.po.Orders;
 import org.apache.ibatis.annotations.Param;
 
 public interface OrderDetailetMapper {
@@ -27,4 +29,11 @@ public interface OrderDetailetMapper {
     int updateByPrimaryKeySelective(OrderDetailet row);
 
     int updateByPrimaryKey(OrderDetailet row);
+
+//    订单明细全查询
+    List<OrderDetailet> selectOrderDetailetAll();
+
+    OrderDetailet selectOrderDetailetBypkWithOrder (Integer odId);
+
+    OrderDetailet selectOrderDetailetBypkWithFood(Integer foodid);
 }
