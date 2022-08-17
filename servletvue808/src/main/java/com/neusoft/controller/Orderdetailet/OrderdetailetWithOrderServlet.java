@@ -18,16 +18,15 @@ public class OrderdetailetWithOrderServlet extends HttpServlet {
     this.OrderdetailetWitOrder(request, response);
     }
 
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     this.OrderdetailetWitOrder(request, response);
     }
     protected void OrderdetailetWitOrder(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Integer foodid= Integer.valueOf(request.getParameter("foodid"));
+        Integer odid= Integer.valueOf(request.getParameter("odid"));
 
         OrderdetailetServiceImpl service = new OrderdetailetServiceImpl();
-        OrderDetailet orderDetailet = service.SelectBy(foodid);
+        OrderDetailet orderDetailet = service.selectall(odid);
         MessageAndData mad = MessageAndData.success("执行成功").add("ulists", orderDetailet);
 
         Gson gson = new Gson();

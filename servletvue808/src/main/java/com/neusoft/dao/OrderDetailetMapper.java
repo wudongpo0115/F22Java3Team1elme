@@ -33,7 +33,7 @@ public interface OrderDetailetMapper {
 //    订单明细全查询
     List<OrderDetailet> selectOrderDetailetAll();
 
-    OrderDetailet selectOrderDetailetBypkWithOrder (Integer odId);
+    OrderDetailet selectOrderDetailetBypkWithOrder (Integer odid);
 
-    OrderDetailet selectOrderDetailetBypkWithFood(Integer foodid);
+    OrderDetailet selectOrderDetailetBypkWithFood(Integer odId);
 }

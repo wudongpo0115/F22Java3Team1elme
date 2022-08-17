@@ -49,7 +49,6 @@ public class OrderDetailetExample {
         if (oredCriteria.size() == 0) {
             oredCriteria.add(criteria);
         }
-
         return criteria;
     }
 

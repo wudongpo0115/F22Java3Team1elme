@@ -211,19 +211,19 @@
   </association>
   </resultMap>
   <select id="selectOrderDetailetBypkWithOrder" parameterType="java.lang.Integer" resultMap="BaseResultMapWithInfo">
-    select *
-    from orderdetailet o1
-           left join orders o on o.orderId = o1.orderId
-      where o1.orderId=#{orderid,jdbcType=INTEGER}
+    select o.odid,o.orderid,o.foodid,o.quantity,o1.orderid,o1.userid,o1.businessid,o1.orderDate,o1.orderTotal,o1.daid,o1.orderstate
+    from orderdetailet o
+           join orders  o1 on o.orderId = o1.orderId
+    where odid=#{odid,jdbcType=INTEGER}
 </select>
 
   <!--food orderlist连-->
   <resultMap id="BaseResultMapWithInfo1" type="com.neusoft.po.OrderDetailet">
   <id column="odId" jdbcType="INTEGER" property="odid" />
-  <result column="orderid" jdbcType="INTEGER" property="orderid" />
-  <result column="foodid" jdbcType="INTEGER" property="foodid" />
+  <result column="foodId" jdbcType="INTEGER" property="orderid" />
+  <result column="orderId" jdbcType="INTEGER" property="foodid" />
   <result column="quantity" jdbcType="INTEGER" property="quantity" />
-  <association property="Food" javaType="com.neusoft.po.Food">
+  <association property="food" javaType="com.neusoft.po.Food">
     <id column="foodId" jdbcType="INTEGER" property="foodid" />
     <result column="foodName" jdbcType="VARCHAR" property="foodname" />
     <result column="foodExplain" jdbcType="VARCHAR" property="foodexplain" />
@@ -234,9 +234,9 @@
 
   </resultMap>
   <select id="selectOrderDetailetBypkWithFood" parameterType="java.lang.Integer" resultMap="BaseResultMapWithInfo1">
-    select *
+    select o1.orderId as orderID,o1.foodId as foodId,o1.odId as odId,o1.quantity as quantity,o.businessId as businessId,o.foodImg as foodImg,o.foodExplain as foodExplain,o.foodName as foodName,o.remarks as remarks,o.foodPrice as foodPrice
     from orderdetailet o1
            left join food o on o1.foodId = o.foodId
-    where o1.foodId=#{orderid,jdbcType=INTEGER}
+    where o1.odId=#{odid,jdbcType=INTEGER}
   </select>
 </mapper>

@@ -23,7 +23,6 @@ public class OrderDetailet {
         return orderid;
     }
 
-
     public void setOrderid(Integer orderid) {
         this.orderid = orderid;
     }
@@ -61,11 +60,12 @@ public class OrderDetailet {
                 ", orderid=" + orderid +
                 ", foodid=" + foodid +
                 ", quantity=" + quantity +
+                ", orders=" + orders +
+                ", food=" + food +
                 '}';
     }
 
-
-//    1对orders
+    //    1对orders
     private Orders orders;
 
     public Orders getOrders() {
@@ -77,7 +77,7 @@ public class OrderDetailet {
     }
 
 //    1对food
-    private Food food;
+    private Food food = new Food();
 
     public Food getFood() {
         return food;

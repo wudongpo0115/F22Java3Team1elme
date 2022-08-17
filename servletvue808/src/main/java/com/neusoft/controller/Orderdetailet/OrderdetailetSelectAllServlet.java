@@ -21,7 +21,6 @@ public class OrderdetailetSelectAllServlet extends HttpServlet {
     this.SelectAll(request, response);
     }
 
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     this.SelectAll(request, response);
